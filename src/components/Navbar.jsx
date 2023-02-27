@@ -1,16 +1,50 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth, db } from '../firebase'
+import { signOut } from "firebase/auth"
+import { updateDoc, doc } from 'firebase/firestore'
+import { AuthContext } from '../context/auth'
 
 const Navbar = () => {
-  return (
-    <div className='navbar'>
-      <span className="logo">FakeApp</span>
-      <div className="user">
-        <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg" alt="" />
-        <span>Gautam</span>
-        <button>Logout</button>
-      </div>
-    </div>
-  )
+    const navigate = useNavigate()
+
+    const { user } = useContext(AuthContext)
+    console.log(user)
+
+    const handleSignout = async () => {
+        await updateDoc(doc(db, "users", auth.currentUser.uid), {
+            isOnline: false
+        })
+        await signOut(auth)
+        navigate('/login')
+    }
+
+    return (
+        <nav>
+            <h3><Link to="/">Messenger</Link></h3>
+
+            <div>
+
+                {user
+                    ?
+                    (
+                        <div>
+                            <Link to={'/profile'}>Profile</Link>
+                            <button className='btn' onClick={handleSignout}>Logout</button>
+                        </div>
+                    )
+
+                    :
+                    (
+                        <div>
+                            <Link to={'/register'}>Register</Link>
+                            <Link to={'/login'}>Login</Link>
+                        </div>
+                    )
+                }
+            </div>
+        </nav>
+    )
 }
 
-export default Navbar 
+export default Navbar

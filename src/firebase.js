@@ -1,18 +1,24 @@
 
 import { initializeApp } from "firebase/app";
-import { getAuth} from "firebase/auth";
-import {getStorage} from "firebase/storage"
+import { getAuth } from "firebase/auth"
+import { getFirestore } from "firebase/firestore"
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDbqAVwzYwpXyf9DDXZmxysAm69NQzlA8Q",
-  authDomain: "chat-cd813.firebaseapp.com",
-  projectId: "chat-cd813",
-  storageBucket: "chat-cd813.appspot.com",
-  messagingSenderId: "14012333524",
-  appId: "1:14012333524:web:1f46aaea0765b468902a41"
+    apiKey: "AIzaSyAowjCTy97RXfH-TYjS6WQsaOttdNfUj4E",
+    authDomain: "feba-messen.firebaseapp.com",
+    databaseURL: "http://feba-messen.firebaseapp.com",
+    projectId: "feba-messen",
+    storageBucket: "feba-messen.appspot.com",
+    messagingSenderId: "669590781789",
+    appId: "1:669590781789:web:3db1d91f7ed58b221a72b4"
 };
 
 
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth()
-export const storage = getStorage();
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
+const db = getFirestore(app)
+const storage = getStorage(app);
+
+export { auth, db, storage };
