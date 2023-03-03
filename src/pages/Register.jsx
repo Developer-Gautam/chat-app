@@ -41,7 +41,7 @@ const Register = () => {
             })
             setData({ name: "", email: "", password: "", error: null, loading: false })
             console.log(result)
-            navigate('/')
+            navigate('/home')
         } catch (err) {
             setData({ ...data, error: err.message, loading: false })
         }

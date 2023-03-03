@@ -16,12 +16,12 @@ const Navbar = () => {
             isOnline: false
         })
         await signOut(auth)
-        navigate('/login')
+        navigate('/')
     }
 
     return (
         <nav>
-            <h3><Link to="/">Messenger</Link></h3>
+            <h3><Link to="/home">Messenger</Link></h3>
 
             <div>
 
@@ -38,7 +38,7 @@ const Navbar = () => {
                     (
                         <div>
                             <Link to={'/register'}>Register</Link>
-                            <Link to={'/login'}>Login</Link>
+                            <Link to={'/'}>Login</Link>
                         </div>
                     )
                 }
